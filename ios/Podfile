@@ -32,6 +32,7 @@ target 'KindeSDKRN' do
   end
 
   pod 'RNKeychain', :path => '../node_modules/react-native-keychain'
+  pod 'RNInAppBrowser', :path => '../node_modules/react-native-inappbrowser-reborn'
 
   post_install do |installer|
     react_native_post_install(

@@ -11,22 +11,20 @@ Follow [the installation instructions for your chosen OS](https://reactnative.de
 ## Installation
 
 Navigate into your project's root directory and execute the bash command shown below
-```shell
-$ npm install
-```
-For iOS, you need to updating iOS native dependencies by **CocoaPods**. We recommend installing **CocoaPods** using [Homebrew](https://brew.sh/)
 
 ```shell
-# Install CocoaPods via brew
-brew install cocoapods
+# Install dependencies
+$ npm install
 
 # Install iOS native dependencies
-cd ios && pod install
+$ cd ios
+$ bundle install && bundle exec pod install
 ```
 
 ## Setup environments
 
 You should change Kinde config in the `.env` file:
+
 ```
 KINDE_ISSUER_URL=https://your_kinde_domain.kinde.com
 KINDE_POST_CALLBACK_URL=myapp://your_kinde_domain.kinde.com/kinde_callback
