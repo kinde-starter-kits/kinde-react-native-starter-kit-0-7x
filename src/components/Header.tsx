@@ -31,10 +31,10 @@ const Header = () => {
   const client = useMemo(
     () =>
       new KindeSDK(
-        'https://trung.kinde.com',
-        'myapp://trung.kinde.com/kinde_callback',
+        'https://your_kinde_domain.kinde.com',
+        'myapp://your_kinde_domain.kinde.com/kinde_callback',
         'spa@live',
-        'myapp://trung.kinde.com/kinde_callback',
+        'myapp://your_kinde_domain.kinde.com/kinde_callback',
       ),
     [],
   );
