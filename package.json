@@ -21,6 +21,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
+    "@types/node": "^20.3.1",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "@types/react-test-renderer": "^18.0.0",

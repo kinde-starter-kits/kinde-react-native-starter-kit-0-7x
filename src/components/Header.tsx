@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
@@ -20,7 +14,8 @@ import {
 } from '@kinde-oss/react-native-sdk';
 import Avatar from './Avatar';
 import LoadingContext from './context/LoadingContext';
-const {dependencies} = require('../../package.json');
+import {dependencies} from '../../package.json';
+import React from 'react';
 
 const Header = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | undefined>(
@@ -31,10 +26,10 @@ const Header = () => {
   const client = useMemo(
     () =>
       new KindeSDK(
-        'https://your_kinde_domain.kinde.com',
-        'myapp://your_kinde_domain.kinde.com/kinde_callback',
+        'https://trung.kinde.com',
+        'myapp://trung.kinde.com/kinde_callback',
         'spa@live',
-        'myapp://your_kinde_domain.kinde.com/kinde_callback',
+        'myapp://trung.kinde.com/kinde_callback',
       ),
     [],
   );
@@ -43,7 +38,7 @@ const Header = () => {
     setIsLoading(true);
 
     const dataPrint: any = {
-      'React Version': dependencies['react'],
+      'React Version': dependencies.react,
       'React Native Version': dependencies['react-native'],
     };
     const token = await client.getToken();
@@ -71,8 +66,12 @@ const Header = () => {
     const getUserOrganizations = await client.getUserOrganizations();
     dataPrint['Get User Organizations'] = JSON.stringify(getUserOrganizations);
 
-    const keys = Object.keys(dataPrint);
-    console.table(keys.map(k => ({Target: k, Result: dataPrint[k]})));
+    console.log(JSON.stringify(dataPrint, undefined, 4));
+
+    // <-- Enable this block code when you're running debug mode to make the output prettier -->
+    // const keys = Object.keys(dataPrint);
+    // console.table(keys.map(k => ({Target: k, Result: dataPrint[k]})));
+
     setIsLoading(false);
   }, [client, setIsLoading, setUserProfile]);
 
@@ -107,31 +106,41 @@ const Header = () => {
       setUserProfile(undefined);
     }
   };
+
+  const renderContent = () => {
+    if (isLoading) {
+      return <ActivityIndicator size="large" />;
+    }
+
+    if (userProfile) {
+      return <Avatar userProfile={userProfile} handleLogout={handleLogout} />;
+    }
+
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity
+          onPress={handleSignIn}
+          style={styles.btn}
+          disabled={isLoading}>
+          <Text style={styles.text}>Sign In</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{...styles.btn, backgroundColor: '#000'}}
+          onPress={handleSignUp}
+          disabled={isLoading}>
+          <Text style={{...styles.text, color: '#FFF'}}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.header}>
       <View>
         <Text style={{...styles.text, fontSize: 18}}>KindeAuth</Text>
       </View>
-      {isLoading ? (
-        <ActivityIndicator size="large" />
-      ) : (async () => await client.isAuthenticated) && userProfile ? (
-        <Avatar userProfile={userProfile} handleLogout={handleLogout} />
-      ) : (
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity
-            onPress={handleSignIn}
-            style={styles.btn}
-            disabled={isLoading}>
-            <Text style={styles.text}>Sign In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{...styles.btn, backgroundColor: '#000'}}
-            onPress={handleSignUp}
-            disabled={isLoading}>
-            <Text style={{...styles.text, color: '#FFF'}}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+
+      {renderContent()}
     </View>
   );
 };

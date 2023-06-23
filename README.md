@@ -23,13 +23,15 @@ $ bundle install && bundle exec pod install
 
 ## Setup environments
 
-You should change Kinde config in the `.env` file:
+You should change Kinde config in the `src/components/Header.tsx` file:
 
-```
-KINDE_ISSUER_URL=https://your_kinde_domain.kinde.com
-KINDE_POST_CALLBACK_URL=myapp://your_kinde_domain.kinde.com/kinde_callback
-KINDE_POST_LOGOUT_REDIRECT_URL=myapp://your_kinde_domain.kinde.com/kinde_callback
-KINDE_CLIENT_ID=your_kinde_client_id
+```javascript
+new KindeSDK(
+	'https://your_kinde_domain.kinde.com',
+	'myapp://your_kinde_domain.kinde.com/kinde_callback',
+	'spa@live',
+	'myapp://your_kinde_domain.kinde.com/kinde_callback',
+)
 ```
 
 ### How to start?
@@ -79,3 +81,18 @@ Open `AndroidManifest.xml` and change your scheme:
         <data android:scheme="app" android:host="your_kinde_domain.kinde.com" />
     </intent-filter>
 ```
+
+### SDK Documentation
+The whole documentation can be found at: [React Native SDK 0.7x](https://kinde.com/docs/developer-tools/react-native-sdk)
+
+### General Tips
+
+If you got the error `'value' is unavailable: introduced in iOS 12.0` when trying to build the app, you can follow the below steps to fix that:
+
+1. In your Xcode project navigator, select Pods.
+2. Under Targets, select React-Codegen
+3. Set the window to Build Settings
+4. Under Deployment, set iOS Deployment Target to 12.4
+5. Clean project and rebuild: Product > Clean Build Folder, Product > Build
+
+![screenshot](./assets/image.png)
