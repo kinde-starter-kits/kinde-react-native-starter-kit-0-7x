@@ -2,6 +2,10 @@
 
 Integrate with React Native SDK to guide how to use it
 
+## Register an account on Kinde
+
+To get started set up an account on [Kinde](https://app.kinde.com/register).
+
 ## Installing dependencies
 
 You will need Node, the React Native command line interface, a JDK, Android Studio (for Android) and Xcode (for iOS).
