@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@kinde-oss/react-native-sdk": "file:kinde-oss-react-native-sdk-0-7x-1.1.2.tgz",
+    "@kinde-oss/react-native-sdk-0-7x": "^1.1.5",
     "react": "18.1.0",
     "react-native": "0.70.6"
   },
