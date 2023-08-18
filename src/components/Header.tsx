@@ -11,7 +11,7 @@ import {
   Storage,
   TokenType,
   UserProfile,
-} from '@kinde-oss/react-native-sdk';
+} from '@kinde-oss/react-native-sdk-0-7x';
 import Avatar from './Avatar';
 import LoadingContext from './context/LoadingContext';
 import {dependencies} from '../../package.json';

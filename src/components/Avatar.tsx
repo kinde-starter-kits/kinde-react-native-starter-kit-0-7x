@@ -1,4 +1,4 @@
-import {UserProfile} from '@kinde-oss/react-native-sdk';
+import {UserProfile} from '@kinde-oss/react-native-sdk-0-7x';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
