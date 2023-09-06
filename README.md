@@ -31,10 +31,10 @@ You should change Kinde config in the `src/components/Header.tsx` file:
 
 ```javascript
 new KindeSDK(
-	'https://your_kinde_domain.kinde.com',
-	'myapp://your_kinde_domain.kinde.com/kinde_callback',
-	'spa@live',
-	'myapp://your_kinde_domain.kinde.com/kinde_callback',
+	'https://<your_kinde_domain>.kinde.com',
+	'myapp://<your_kinde_domain>.kinde.com/kinde_callback',
+	'<your_kinde_client_id>',
+	'myapp://<your_kinde_domain>.kinde.com/kinde_callback',
 )
 ```
 
