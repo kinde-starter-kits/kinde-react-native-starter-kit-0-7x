@@ -2,6 +2,11 @@
 
 Integrate with React Native SDK to guide how to use it
 
+## Prerequisites
+
+- NodeJS version 16.x or higher
+- Ruby version 2.7.5 or higher
+
 ## Register an account on Kinde
 
 To get started set up an account on [Kinde](https://app.kinde.com/register).
@@ -31,11 +36,11 @@ You should change Kinde config in the `src/components/Header.tsx` file:
 
 ```javascript
 new KindeSDK(
-	'https://your_kinde_domain.kinde.com',
-	'myapp://your_kinde_domain.kinde.com/kinde_callback',
-	'spa@live',
-	'myapp://your_kinde_domain.kinde.com/kinde_callback',
-)
+  'https://your_kinde_domain.kinde.com',
+  'myapp://your_kinde_domain.kinde.com/kinde_callback',
+  'spa@live',
+  'myapp://your_kinde_domain.kinde.com/kinde_callback',
+);
 ```
 
 ### How to start?
@@ -87,6 +92,7 @@ Open `AndroidManifest.xml` and change your scheme:
 ```
 
 ### SDK Documentation
+
 The whole documentation can be found at: [React Native SDK 0.7x](https://kinde.com/docs/developer-tools/react-native-sdk)
 
 ### General Tips
