@@ -1,70 +1,84 @@
-# React Native Starter Kit
+# Kinde Starter Kit - React Native 0.7x
 
-Integrate with React Native SDK to guide how to use it
+The Kinde Starter Kit for React Native SDK 0.7x.
 
-## Prerequisites
-
-- NodeJS version 16.x or higher
-- Ruby version 2.7.5 or higher
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Kinde Docs](https://img.shields.io/badge/Kinde-Docs-eee?style=flat-square)](https://kinde.com/docs/developer-tools) [![Kinde Community](https://img.shields.io/badge/Kinde-Community-eee?style=flat-square)](https://thekindecommunity.slack.com)
 
 ## Register an account on Kinde
 
 To get started set up an account on [Kinde](https://app.kinde.com/register).
 
-## Installing dependencies
+## Development
 
-You will need Node, the React Native command line interface, a JDK, Android Studio (for Android) and Xcode (for iOS).
+### Prerequisites
 
-Follow [the installation instructions for your chosen OS](https://reactnative.dev/docs/environment-setup) to install dependencies;
+- NodeJS version 16.x or higher
+- Ruby version 2.7.5 or higher
 
-## Installation
+Follow [the installation instructions for your chosen OS](https://reactnative.dev/docs/environment-setup) to install dependencies
 
-Navigate into your project's root directory and execute the bash command shown below
+### Initial set up
 
+
+1. Clone the repository to your machine:
 ```shell
-# Install dependencies
-$ npm install
+git clone https://github.com/kinde-starter-kits/kinde-react-native-starter-kit-0-7x.git
+```
+2. Go into the project:
+```shell
+cd kinde-react-native-starter-kit-0-7x
+```
+3. Install the dependencies:
+```shell
+npm install
 
-# Install iOS native dependencies
-$ cd ios
-$ bundle install && bundle exec pod install
+# [iOS] Install iOS native dependencies
+cd ios
+bundle install && bundle exec pod install
 ```
 
-## Setup environments
+### Setup your local environment
 
 You should change Kinde config in the `src/components/Header.tsx` file:
 
 ```javascript
 new KindeSDK(
   'https://your_kinde_domain.kinde.com',
-  'myapp://your_kinde_domain.kinde.com/kinde_callback',
-  'spa@live',
-  'myapp://your_kinde_domain.kinde.com/kinde_callback',
+  'your_schema://your_kinde_domain.kinde.com/kinde_callback',
+  'your_kinde_client_id',
+  'your_schema://your_kinde_domain.kinde.com/kinde_callback',
 );
 ```
 
-### How to start?
+### Set your Callback and Logout URLs
 
-#### Start the metro server
+Your user will be redirected to Kinde to authenticate. After they have logged in or registered they will be redirected back to your NextJS application.
 
-Run below command:
+You need to specify in Kinde which url you would like your user to be redirected to in order to authenticate your app.
 
-```shell
-$ npm start --reset-cache
+On the App Keys page set `Allowed callback URLs` to your deep linking
+
+> Important! This is required for your users to successfully log in to your app.
+
+You will also need to set the url they will be redirected to upon logout. Set the `Allowed logout redirect URLs` to your deep linking.
+
+### Configuration Deep link
+
+#### Android
+
+Open `AndroidManifest.xml` and change your scheme:
+
+```xml
+<intent-filter>
+	<action android:name="android.intent.action.VIEW" />
+	<category android:name="android.intent.category.DEFAULT" />
+	<category android:name="android.intent.category.BROWSABLE" />
+	<data android:scheme="your_schema" android:host="your_kinde_domain.kinde.com" />
+</intent-filter>
 ```
+#### iOS
 
-#### Start your app
-```shell
-# iOS
-$ npm run ios
-# or for Android
-$ npm run android
-```
-#### Configuration Deep link
-
-##### iOS
-
-Please make sure you have configuration URL scheme in `Info.plist`, so app can be opened by deep link:
+Please make sure you have configuration URL scheme in `Info.plist`:
 
 ```swift
 ...
@@ -74,10 +88,10 @@ Please make sure you have configuration URL scheme in `Info.plist`, so app can b
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>myapp</string>  // you can change this schema
+			<string>your_schema</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>myapp</string> // you can change this schema
+				<string>your_schema</string>
 			</array>
 		</dict>
 	</array>
@@ -85,24 +99,29 @@ Please make sure you have configuration URL scheme in `Info.plist`, so app can b
 
 ```
 
-##### Android
+### How to start?
 
-Open `AndroidManifest.xml` and change your scheme:
+#### Start the metro server
 
-```xml
-    <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="app" android:host="your_kinde_domain.kinde.com" />
-    </intent-filter>
+Run below command:
+
+```shell
+npm start --reset-cache
 ```
 
-### SDK Documentation
+#### Start your app
+```shell
+# iOS
+npm run ios
+# or for Android
+npm run android
+```
 
-The whole documentation can be found at: [React Native SDK 0.7x](https://kinde.com/docs/developer-tools/react-native-sdk)
+## Documentation
 
-### General Tips
+For details on integrating this SDK into your project, head over to the [Kinde docs](https://kinde.com/docs/) and see the [React Native SDK 0.7x](<[https://kinde.com/docs/developer-tools/react-native-sdk/](https://kinde.com/docs/developer-tools/)>) doc 👍🏼.
+
+## General Tips
 
 If you got the error `'value' is unavailable: introduced in iOS 12.0` when trying to build the app, you can follow the below steps to fix that:
 
@@ -113,3 +132,14 @@ If you got the error `'value' is unavailable: introduced in iOS 12.0` when tryin
 5. Clean project and rebuild: Product > Clean Build Folder, Product > Build
 
 ![screenshot](./assets/image.png)
+## Publishing
+
+The core team handles publishing.
+
+## Contributing
+
+Please refer to Kinde’s [contributing guidelines](https://github.com/kinde-oss/.github/blob/489e2ca9c3307c2b2e098a885e22f2239116394a/CONTRIBUTING.md).
+
+## License
+
+By contributing to Kinde, you agree that your contributions will be licensed under its MIT License.

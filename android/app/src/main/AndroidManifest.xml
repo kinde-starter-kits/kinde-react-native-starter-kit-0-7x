@@ -23,7 +23,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="myapp" android:host="your_kinde_domain.kinde.com" />
+            <data android:scheme="myapp" android:host="trung.kinde.com" />
         </intent-filter>
       </activity>
     </application>
