@@ -45,7 +45,7 @@ new KindeSDK(
 
 ### How to start?
 
-#### Start metro server
+#### Start the metro server
 
 Run below command:
 
@@ -53,6 +53,13 @@ Run below command:
 $ npm start --reset-cache
 ```
 
+#### Start your app
+```shell
+# iOS
+$ npm run ios
+# or for Android
+$ npm run android
+```
 #### Configuration Deep link
 
 ##### iOS
@@ -67,10 +74,10 @@ Please make sure you have configuration URL scheme in `Info.plist`, so app can b
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>myapp</string>
+			<string>myapp</string>  // you can change this schema
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>myapp</string>
+				<string>myapp</string> // you can change this schema
 			</array>
 		</dict>
 	</array>

@@ -28,7 +28,7 @@ const Header = () => {
       new KindeSDK(
         'https://your_kinde_domain.kinde.com',
         'myapp://your_kinde_domain.kinde.com/kinde_callback',
-        'spa@live',
+        'your_kinde_client_id',
         'myapp://your_kinde_domain.kinde.com/kinde_callback',
       ),
     [],
