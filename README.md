@@ -119,7 +119,7 @@ npm run android
 
 ## Documentation
 
-For details on integrating this SDK into your project, head over to the [Kinde docs](https://kinde.com/docs/) and see the [React Native SDK 0.7x](<[https://kinde.com/docs/developer-tools/react-native-sdk/](https://kinde.com/docs/developer-tools/)>) doc 👍🏼.
+For details on integrating this SDK into your project, head over to the [Kinde docs](https://kinde.com/docs/) and see the [React Native SDK 0.6x](https://kinde.com/docs/developer-tools/react-native-sdk) doc 👍🏼.
 
 ## General Tips
 
