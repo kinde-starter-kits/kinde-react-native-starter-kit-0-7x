@@ -17,11 +17,11 @@ target 'KindeSDKRN' do
     # we make it explicit here to aid in the React Native upgrade process.
     :hermes_enabled => true,
     :fabric_enabled => flags[:fabric_enabled],
-    # Enables Flipper.
-    #
-    # Note that if you have use_frameworks! enabled, Flipper will not work and
-    # you should disable the next line.
-    :flipper_configuration => FlipperConfiguration.enabled,
+
+    # Flipper is optional (debugging tool) and is not required for validating login/logout.
+    # Some newer Xcode toolchains can fail to build Flipper; default to disabled.
+    # To enable, run with ENABLE_FLIPPER=1.
+    :flipper_configuration => (ENV['ENABLE_FLIPPER'] == '1' ? FlipperConfiguration.enabled : FlipperConfiguration.disabled),
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
@@ -39,5 +39,18 @@ target 'KindeSDKRN' do
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    # C++17: RCT-Folly/Boost use std::unary_function (removed in C++17). Re-enable for build.
+    cxx17_flag = '-D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION'
+    installer.pods_project.targets.each do |t|
+      t.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.4'
+        flags = config.build_settings['OTHER_CPLUSPLUSFLAGS']
+        flags = '$(inherited)' if flags.nil?
+        flags = flags.join(' ') if flags.is_a?(Array)
+        unless flags.to_s.include?(cxx17_flag)
+          config.build_settings['OTHER_CPLUSPLUSFLAGS'] = "#{flags} #{cxx17_flag}".strip
+        end
+      end
+    end
   end
 end
